@@ -21,7 +21,7 @@ endif
 
 " which key is used to toggle terminal
 if !exists('g:terminal_key')
-	let g:terminal_key = '<m-=>'
+	let g:terminal_key = '<m-q>'
 endif
 
 " initialize shell directory
@@ -117,7 +117,7 @@ endfunc
 function! TerminalOpen(...)
 	let bid = get(t:, '__terminal_bid__', -1)
 	let pos = get(g:, 'terminal_pos', 'rightbelow')
-	let height = get(g:, 'terminal_height', 10)
+	let height = get(g:, 'terminal_height', 8)
 	let succeed = 0
 	function! s:terminal_view(mode)
 		if a:mode == 0
@@ -454,16 +454,17 @@ if get(g:, 'terminal_default_mapping', 1)
 		tnoremap <m-J> <c-_>j
 		tnoremap <m-K> <c-_>k
 		tnoremap <m-N> <c-_>p
-		tnoremap <m-q> <c-\><c-n>
+		tnoremap jj <c-\><c-n>
 		tnoremap <m--> <c-_>"0
+		tnoremap <m-+> <c-_>"+
 	elseif has('nvim')
 		tnoremap <m-H> <c-\><c-n><c-w>h
 		tnoremap <m-L> <c-\><c-n><c-w>l
 		tnoremap <m-J> <c-\><c-n><c-w>j
 		tnoremap <m-K> <c-\><c-n><c-w>k
 		tnoremap <m-N> <c-\><c-n><c-w>p
-		tnoremap <m-q> <c-\><c-n>
-		tnoremap <m--> <c-\><c-n>"0pa
+		tnoremap jj <c-\><c-n>
+		tnoremap <m-+> <c-\><c-n>"+pa
 	endif
 
 	let s:cmd = 'nnoremap <silent>'.(g:terminal_key). ' '
